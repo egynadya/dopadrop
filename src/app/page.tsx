@@ -16,11 +16,12 @@ export default function Home() {
   const handleNotification = (message: string) => {
     setNotificationMessage(message)
     setShowNotification(true)
+    setTimeout(() => setShowNotification(false), 3000)
   }
 
   return (
     <main className="min-h-screen p-8">
-      <div className="mx-auto max-w-4xl space-y-8">
+      <div className="mx-auto max-w-4xl space-y-8 bg-white/90 p-8 rounded-lg shadow-xl">
         <h1 className="text-4xl font-bold text-center text-gray-800">DopaDrop</h1>
         
         <Tabs defaultValue="focus" className="w-full">
