@@ -16,15 +16,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const basePath = process.env.NODE_ENV === 'production' ? '/dopadrop' : '';
-  
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href={`${basePath}/favicon.ico`} />
-      </head>
       <body className={`${inter.className} min-h-screen`} style={{
-        backgroundImage: `url("${basePath}/background.jpg")`,
+        backgroundImage: 'url("https://i.imgur.com/2l7dffv.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
