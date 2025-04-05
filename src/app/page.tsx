@@ -13,12 +13,44 @@ export default function Home() {
   const [showNotification, setShowNotification] = useState(false)
   const [notificationMessage, setNotificationMessage] = useState("")
   const [activeTab, setActiveTab] = useState("focus")
+  const [time, setTime] = useState(25 * 60) // 25 minutes in seconds
+  const [isActive, setIsActive] = useState(false)
+
+  const minutes = Math.floor(time / 60)
+  const seconds = time % 60
 
   const handleNotification = (message: string) => {
     setNotificationMessage(message)
     setShowNotification(true)
     setTimeout(() => setShowNotification(false), 3000)
   }
+
+  const startTimer = () => {
+    setIsActive(true)
+  }
+
+  const stopTimer = () => {
+    setIsActive(false)
+  }
+
+  const resetTimer = () => {
+    setIsActive(false)
+    setTime(25 * 60)
+  }
+
+  useState(() => {
+    let interval: NodeJS.Timeout
+
+    if (isActive && time > 0) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime - 1)
+      }, 1000)
+    } else if (time === 0) {
+      setIsActive(false)
+    }
+
+    return () => clearInterval(interval)
+  }, [isActive, time])
 
   return (
     <main className="min-h-screen p-8">
@@ -38,6 +70,35 @@ export default function Home() {
           </TabsList>
           
           <TabsContent value="focus" className="space-y-8">
+            <div className="text-center mb-8">
+              <div className="text-6xl font-bold text-gray-700 mb-4">
+                {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+              </div>
+              
+              <div className="space-x-4">
+                {!isActive ? (
+                  <button
+                    onClick={startTimer}
+                    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                  >
+                    Start
+                  </button>
+                ) : (
+                  <button
+                    onClick={stopTimer}
+                    className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                  >
+                    Stop
+                  </button>
+                )}
+                <button
+                  onClick={resetTimer}
+                  className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
             <FocusTimer 
               onComplete={() => handleNotification("Focus session complete!")}
             />
@@ -46,6 +107,35 @@ export default function Home() {
           </TabsContent>
           
           <TabsContent value="detox" className="space-y-8">
+            <div className="text-center mb-8">
+              <div className="text-6xl font-bold text-gray-700 mb-4">
+                {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+              </div>
+              
+              <div className="space-x-4">
+                {!isActive ? (
+                  <button
+                    onClick={startTimer}
+                    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                  >
+                    Start
+                  </button>
+                ) : (
+                  <button
+                    onClick={stopTimer}
+                    className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                  >
+                    Stop
+                  </button>
+                )}
+                <button
+                  onClick={resetTimer}
+                  className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
             <DetoxTimer
               onReminder={handleNotification}
             />

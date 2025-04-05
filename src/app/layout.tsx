@@ -18,15 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen`} style={{
-        backgroundImage: 'url("https://i.imgur.com/2l7dffv.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}>
-        <div className="min-h-screen bg-black/30">
-          {children}
+      <body className={inter.className}>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="container">
+            {children}
+          </div>
         </div>
       </body>
     </html>
