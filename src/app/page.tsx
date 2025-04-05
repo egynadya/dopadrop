@@ -6,7 +6,7 @@ import { FocusTimer } from "@/components/focus-timer"
 import { DetoxTimer } from "@/components/detox-timer"
 import { Reflection } from "@/components/reflection"
 import { Notification } from "@/components/notification"
-import { MoonStar, Sun, ThumbsUp } from "lucide-react"
+import { MoonStar, Sun } from "lucide-react"
 import { StreakCity } from "@/components/streak-city"
 
 export default function Home() {
